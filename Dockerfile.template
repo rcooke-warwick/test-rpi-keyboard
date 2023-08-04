@@ -1,0 +1,16 @@
+FROM balenalib/%%RESIN_MACHINE_NAME%%-debian
+
+WORKDIR usr/src/app
+
+RUN apt-get update && apt-get install vim git build-essential && \
+    git clone https://github.com/aagallag/hid_gadget_test.git && \
+    mv hid_gadget_test hid_test && cd hid_test && \
+    make && \
+    cp hid_gadget_test ../ && cd ..
+
+COPY run.sh ./
+COPY send_chars.sh ./
+
+ENV UDEV=1
+
+CMD ["bash", "run.sh"]

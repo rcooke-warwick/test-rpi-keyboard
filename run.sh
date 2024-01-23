@@ -33,7 +33,8 @@ else
     ls /sys/class/udc > UDC
 fi
 
-# Don't exit the process
-while true; do
-    sleep 1
-done
+# # Don't exit the process
+# while true; do
+#     sleep 1
+# done
+node ./lib/index.js

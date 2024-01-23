@@ -1,4 +1,4 @@
-FROM balenalib/%%RESIN_MACHINE_NAME%%-debian
+FROM balenalib/%%RESIN_MACHINE_NAME%%-node:16
 
 WORKDIR usr/src/app
 
@@ -10,6 +10,12 @@ RUN apt-get update && apt-get install vim git build-essential && \
 
 COPY run.sh ./
 COPY send_chars.sh ./
+RUN chmod +x send_chars.sh
+
+COPY package.json ./
+COPY lib ./lib
+
+RUN npm install
 
 ENV UDEV=1
 
